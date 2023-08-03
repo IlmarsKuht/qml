@@ -246,10 +246,10 @@ def layer(x, params, wires, i0=0, inc=1):
     i = i0
     for j, wire in enumerate(wires):
         qml.Hadamard(wires=[wire])
+        qml.RY(params[0, j], wires=[wire])
         qml.RZ(x[i % len(x)], wires=[wire])
         i += inc
-        qml.RY(params[0, j], wires=[wire])
-
+    
     qml.broadcast(unitary=qml.CRZ, pattern="ring", wires=wires, parameters=params[1])
 
 
